@@ -7,7 +7,7 @@ export default function HomePage() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => setMounted(true), 100); // slight delay for smoother start
+    const timer = setTimeout(() => setMounted(true), 100); // small delay for smooth start
     return () => clearTimeout(timer);
   }, []);
 
@@ -15,7 +15,7 @@ export default function HomePage() {
     <main className="relative w-full h-screen overflow-hidden bg-black text-white">
       {/* Fullscreen background image */}
       <div
-        className={`absolute inset-0 bg-cover bg-center transition-opacity duration-[1500ms] ease-out ${
+        className={`absolute inset-0 bg-cover bg-center transition-opacity duration-[2000ms] ease-[cubic-bezier(0.4,0,0.2,1)] ${
           mounted ? "opacity-100" : "opacity-0"
         }`}
         style={{
@@ -26,7 +26,7 @@ export default function HomePage() {
 
       {/* Optional dark overlay */}
       <div
-        className={`absolute inset-0 bg-black transition-opacity duration-[1500ms] ease-out ${
+        className={`absolute inset-0 bg-black transition-opacity duration-[2000ms] ease-[cubic-bezier(0.4,0,0.2,1)] ${
           mounted ? "opacity-40" : "opacity-0"
         }`}
       />
@@ -34,23 +34,25 @@ export default function HomePage() {
       {/* Content */}
       <section className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
         <h1
-          className={`text-5xl md:text-7xl font-bold mb-6 transform transition-all duration-1000 delay-300 ${
-            mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+          className={`text-5xl md:text-7xl font-bold mb-6 transform transition-all duration-[2500ms] delay-300 ease-[cubic-bezier(0.4,0,0.2,1)] origin-center ${
+            mounted ? "opacity-100 scale-100" : "opacity-0 scale-110"
           }`}
         >
           Brisena Audio
         </h1>
+
         <p
-          className={`text-lg md:text-2xl max-w-2xl mb-10 transition-all duration-1000 delay-500 ${
-            mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          className={`text-lg md:text-2xl max-w-2xl mb-10 transition-all duration-[2500ms] delay-600 ease-[cubic-bezier(0.4,0,0.2,1)] origin-center ${
+            mounted ? "opacity-100 scale-100" : "opacity-0 scale-110"
           }`}
         >
           Turning ideas into music.
         </p>
+
         <a
           href="#work"
-          className={`inline-block px-8 py-3 border border-white text-white font-medium transition-all duration-1000 delay-700 ${
-            mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          className={`inline-block px-8 py-3 border border-white text-white font-medium transition-all duration-[2500ms] delay-900 ease-[cubic-bezier(0.4,0,0.2,1)] origin-center ${
+            mounted ? "opacity-100 scale-100" : "opacity-0 scale-110"
           } hover:bg-white hover:text-black`}
         >
           Explore Our Work
