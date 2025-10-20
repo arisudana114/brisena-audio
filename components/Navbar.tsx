@@ -30,16 +30,13 @@ export default function Navbar() {
   return (
     <>
       <nav className="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-6 py-4 bg-transparent text-white">
-        <a
+        <Link
           href="/"
-          onClick={(e) => {
-            e.preventDefault();
-            window.location.href = "/";
-          }}
-          className="text-lg md:text-xl font-semibold tracking-wide hover:text-blue-400 transition-colors duration-300"
+          onClick={() => window.location.reload()}
+          className="text-lg md:text-xl font-semibold tracking-wide"
         >
           BRISENA AUDIO
-        </a>
+        </Link>
 
         {/* Oval "burger" button */}
         <button

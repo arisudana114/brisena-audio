@@ -1,13 +1,12 @@
 // app/projects/page.tsx
 "use client";
 
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function ProjectsPage() {
-  const router = useRouter();
-
-  const handleBack = () => {
-    // Force a full reload to reset states
+  const handleBack = (e: React.MouseEvent) => {
+    e.preventDefault();
+    // Full reload to reset all states
     window.location.href = "/";
   };
 
@@ -17,16 +16,17 @@ export default function ProjectsPage() {
         BELOM JADI H3H3H3
       </h1>
 
-      <button
+      <Link
+        href="/"
         onClick={handleBack}
-        className="mt-4 px-10 py-4 text-lg tracking-widest font-semibold cursor-pointer 
+        className="mt-4 px-10 py-4 text-lg tracking-widest font-semibold 
                    text-white rounded-full border border-white
                    transition-all duration-700 ease-out
                    hover:border-blue-400 hover:shadow-[0_0_25px_6px_rgba(59,130,246,0.75)]
                    hover:animate-pulse"
       >
         BACK TO HOME
-      </button>
+      </Link>
     </main>
   );
 }
