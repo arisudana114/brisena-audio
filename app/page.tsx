@@ -58,7 +58,7 @@ export default function HomePage() {
           className={`text-lg inline-block px-8 py-5 rounded-full text-white font-semibold cursor-pointer tracking-widest 
     origin-center ease-[cubic-bezier(0.4,0,0.2,1)] 
     transition-all
-    ${fastTransition ? "duration-300" : "duration-[2500ms] delay-900"}
+    ${fastTransition ? "duration-500" : "duration-[2500ms] delay-900"}
     ${mounted ? "opacity-100 scale-100" : "opacity-0 scale-110"}
     border border-white hover:border-blue-400 hover:shadow-[0_0_20px_4px_rgba(59,130,246,0.6)]
     hover:scale-105`}
