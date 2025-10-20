@@ -75,7 +75,7 @@ export default function HomePage() {
             : "opacity-0 scale-105 pointer-events-none"
         }`}
       >
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-8 py-12 px-6 md:p-8 w-full max-w-6xl mx-auto">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-8 pt-10 px-6 md:p-8 w-full max-w-6xl mx-auto">
           {[
             "https://www.youtube.com/embed/uqwkjhU2R8E?si=rOMkTMakdkz3vmgL",
             "https://www.youtube.com/embed/jqah-XRLT3M?si=ddAXL6DssvD1Xfqy",
@@ -88,7 +88,7 @@ export default function HomePage() {
           ].map((src, i) => (
             <div
               key={i}
-              className="relative w-full h-48 md:h-64 bg-white/5 rounded-2xl overflow-hidden group transition-all duration-700 hover:scale-[1.03] hover:border-blue-400 border border-transparent hover:shadow-[0_0_25px_6px_rgba(59,130,246,0.65)]"
+              className="relative w-full h-[18vh] md:h-64 bg-white/5 rounded-2xl overflow-hidden group transition-all duration-700 hover:scale-[1.03] hover:border-blue-400 border border-transparent hover:shadow-[0_0_25px_6px_rgba(59,130,246,0.65)]"
             >
               <iframe
                 src={src}
@@ -109,7 +109,7 @@ export default function HomePage() {
         {/* SEE ALL Button */}
         <a
           href="/projects"
-          className="relative mt-6 md:mt-10 px-10 py-4 text-lg tracking-widest font-semibold 
+          className="relative mt-6 md:mt-10 px-10 py-4 text-sm md:text-lg tracking-widest font-semibold 
        text-white rounded-full border border-white
        transition-all duration-700 ease-out
        hover:border-blue-400 hover:shadow-[0_0_25px_6px_rgba(59,130,246,0.75)]
