@@ -34,3 +34,16 @@ body {
 .animate-fadeIn {
   animation: fadeIn 220ms ease forwards;
 }
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 25s linear infinite;
+}

@@ -1,20 +1,33 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useNavbarVisibility } from "@/app/context/NavbarVisibilityContext";
 
 export default function HomePage() {
   const [mounted, setMounted] = useState(false);
   const [fastTransition, setFastTransition] = useState(false);
   const [showProjects, setShowProjects] = useState(false);
+  const { hideNavbar, showNavbar } = useNavbarVisibility();
 
   useEffect(() => {
-    const mountTimer = setTimeout(() => setMounted(true), 100);
+    const mountTimer = setTimeout(() => {
+      hideNavbar(); // hide navbar *after* layout is rendered
+      setMounted(true);
+    }, 100);
+
     const speedUpTimer = setTimeout(() => setFastTransition(true), 2500);
+
     return () => {
       clearTimeout(mountTimer);
       clearTimeout(speedUpTimer);
     };
-  }, []);
+  }, [hideNavbar]);
+
+  // When user clicks "LISTEN TO OUR PROJECT"
+  const handleShowProjects = () => {
+    setShowProjects(true);
+    showNavbar(); // show navbar after button click
+  };
 
   return (
     <main className="relative w-full h-screen overflow-hidden bg-black text-white">
@@ -46,7 +59,7 @@ export default function HomePage() {
         }`}
       >
         <h1
-          className={`text-5xl tracking-tighter md:text-7xl font-bold mb-6 transform transition-all duration-[2500ms] delay-300 ease-[cubic-bezier(0.4,0,0.2,1)] origin-center ${
+          className={`text-7xl tracking-wider md:text-8xl font-bold mb-6 transform transition-all duration-[2500ms] delay-300 ease-[cubic-bezier(0.4,0,0.2,1)] origin-center ${
             mounted ? "opacity-100 scale-100" : "opacity-0 scale-110"
           }`}
         >
@@ -54,7 +67,7 @@ export default function HomePage() {
         </h1>
 
         <button
-          onClick={() => setShowProjects(true)}
+          onClick={handleShowProjects}
           className={`text-lg inline-block px-8 py-5 rounded-full text-white font-semibold cursor-pointer tracking-widest 
     origin-center ease-[cubic-bezier(0.4,0,0.2,1)] 
     transition-all

@@ -1,7 +1,15 @@
 "use client";
 
+import { useNavbarVisibility } from "@/app/context/NavbarVisibilityContext";
 import Link from "next/link";
 import { useState, useRef, useEffect } from "react";
+import { Bebas_Neue } from "next/font/google";
+
+const bebas = Bebas_Neue({
+  subsets: ["latin"],
+  weight: ["400"], // Bebas Neue only has 400, but you can leave it explicit
+  variable: "--font-bebas",
+});
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -27,17 +35,23 @@ export default function Navbar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [open]);
 
+  const { visible } = useNavbarVisibility();
+
+  if (!visible) {
+    return (
+      <nav className="fixed top-0 left-0 w-full h-0 overflow-hidden opacity-0 pointer-events-none" />
+    );
+  }
+
   return (
     <>
       <nav className="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-6 py-4 bg-transparent text-white">
         <Link
           href="/"
-          onClick={() => window.location.reload()}
-          className="text-lg md:text-xl font-semibold tracking-wide"
+          className="text-xl md:text-2xl font-semibold tracking-wide"
         >
           BRISENA AUDIO
         </Link>
-
         {/* Oval "burger" button */}
         <button
           onClick={() => setOpen(true)}
@@ -72,9 +86,10 @@ export default function Navbar() {
       >
         <div
           ref={modalRef}
-          className="relative bg-black text-white w-[85vw] max-w-[1100px] aspect-[5/3]
-                     border border-white/20 shadow-2xl flex flex-col justify-center items-center
-                     transition-all duration-700 ease-out"
+          className={`relative bg-black/60 text-white w-[85vw] max-w-[1100px] aspect-[5/3]
+                border border-blue-400/50 shadow-[0_0_25px_8px_rgba(59,130,246,0.4)]
+                flex flex-col justify-center items-center transition-all duration-700 ease-out
+                backdrop-blur-md hover:shadow-[0_0_35px_12px_rgba(59,130,246,0.6)]`}
           style={{
             borderRadius: "50% / 50%", // horizontally wider oval shape
           }}
@@ -90,17 +105,21 @@ export default function Navbar() {
 
           {/* Navigation links */}
           <nav className="flex flex-wrap justify-around items-center md:justify-between gap-5 md:gap-20 px-8">
-            {["News", "Media", "Discography", "Services", "Contact"].map(
-              (item) => (
-                <a
-                  key={item}
-                  href={`#${item.toLowerCase()}`}
-                  onClick={() => setOpen(false)}
-                  className="text-xl md:text-2xl tracking-wide hover:opacity-80 transition-opacity"
-                >
-                  {item}
-                </a>
-              )
+            {["Why Us", "Our Services", "Our Clients", "Contact"].map(
+              (item) => {
+                const path = item.toLowerCase().replace(/\s+/g, "-");
+                return (
+                  <a
+                    key={item}
+                    href={`/${path}`}
+                    onClick={() => setOpen(false)}
+                    className={`${bebas.className} relative text-xl md:text-5xl tracking-wide transition-all duration-700 group`}
+                  >
+                    {item.toUpperCase()}
+                    <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-blue-400 transition-all duration-500 group-hover:w-full" />
+                  </a>
+                );
+              }
             )}
           </nav>
         </div>
