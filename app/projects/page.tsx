@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 
 const allVideos = [
@@ -93,12 +94,12 @@ export default function ProjectsPage() {
       </div>
 
       {/* Back to Landing Page */}
-      <a
+      <Link
         href="/"
         className="mt-16 text-sm md:text-lg px-10 py-4 border border-white rounded-full tracking-widest font-semibold hover:border-blue-400 hover:shadow-[0_0_25px_6px_rgba(59,130,246,0.75)] transition-all duration-500"
       >
         BACK TO HOME
-      </a>
+      </Link>
     </main>
   );
 }
