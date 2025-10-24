@@ -7,7 +7,7 @@ export default function HomePage() {
   const [mounted, setMounted] = useState(false);
   const [fastTransition, setFastTransition] = useState(false);
   const [showProjects, setShowProjects] = useState(false);
-  const { hideNavbar, showNavbar } = useNavbarVisibility();
+  const { hideNavbar, showNavbar, showWhatsapp } = useNavbarVisibility();
 
   useEffect(() => {
     const mountTimer = setTimeout(() => {
@@ -27,6 +27,7 @@ export default function HomePage() {
   const handleShowProjects = () => {
     setShowProjects(true);
     showNavbar(); // show navbar after button click
+    showWhatsapp(); // show whatsapp floating button as well
   };
 
   return (

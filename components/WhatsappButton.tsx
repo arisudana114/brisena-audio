@@ -1,6 +1,16 @@
+"use client";
+
 import { FaWhatsapp } from "react-icons/fa";
+import { useNavbarVisibility } from "@/app/context/NavbarVisibilityContext";
 
 export default function WhatsappButton() {
+  const { whatsappVisible } = useNavbarVisibility();
+
+  // Render only when provider says the WhatsApp button should be visible.
+  // `whatsappVisible` can be `null` initially (client mount); treat non-true
+  // values as hidden to match server render and avoid hydration mismatch.
+  if (whatsappVisible !== true) return null;
+
   const phoneNumber = "6285775943846";
   const message = encodeURIComponent(
     "Hey I want to know more about your music services!"
