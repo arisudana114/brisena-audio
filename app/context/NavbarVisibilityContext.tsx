@@ -22,7 +22,7 @@ const NavbarVisibilityContext = createContext<{
     visible: true,
     showNavbar: () => {},
     hideNavbar: () => {},
-    whatsappVisible: true,
+    whatsappVisible: null,
     showWhatsapp: () => {},
     hideWhatsapp: () => {},
   }
@@ -43,20 +43,26 @@ export function NavbarVisibilityProvider({
   // This runs only in the browser and will update the state accordingly.
   useEffect(() => {
     try {
+      const isRoot = window.location.pathname === "/";
+
       const stored = localStorage.getItem("navVisible");
       if (stored !== null) {
         setVisible(stored === "true");
       } else {
         // default: hide on landing page (`/`), show elsewhere
-        setVisible(window.location.pathname !== "/");
+        setVisible(!isRoot);
       }
 
+      // For WhatsApp, always hide on the landing page until the user explicitly
+      // clicks the CTA. This prevents previously stored preferences from
+      // showing the floating button on `/` unexpectedly.
       const wsStored = localStorage.getItem("whatsappVisible");
-      if (wsStored !== null) {
+      if (isRoot) {
+        setWhatsappVisible(false);
+      } else if (wsStored !== null) {
         setWhatsappVisible(wsStored === "true");
       } else {
-        // default: hide on landing page (`/`), show elsewhere
-        setWhatsappVisible(window.location.pathname !== "/");
+        setWhatsappVisible(true);
       }
     } catch {
       setVisible(true);
